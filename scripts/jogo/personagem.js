@@ -1,3 +1,4 @@
+//classe do personagem principal controlado pelo usuário
 class Personagem extends Animacao{
   constructor(matriz, 
                imagem, 
@@ -14,16 +15,26 @@ class Personagem extends Animacao{
           larguraSprite, 
           alturaSprite)
    
+  //variáveis responsáveis pela mecânica do pulo
    this.yInicial = height - this.altura;
    this.y = this.yInicial;
    this.velocidadeDoPulo = 0;
    this.gravidade = 3;
+
+   //variável de controle do pulo duplo, true quando o usuário já pulou a primeira vez
+   this.puloDuplo = false;
   }
   
-  
+  //função de pulo excluindo a possibilidade de um pulo duplo, viabiliza que o segundo pulo seja diferente do primeiro
+  //?? daria para aplicar essa lógica com um OR ??
   pula() {
-    this.y = this.y - 50;
-
+    if(this.y == this.yInicial) {
+      this.velocidadeDoPulo = - 30;
+      this.puloDuplo = true;
+    } else if (this.puloDuplo){
+      this.velocidadeDoPulo = -30;
+      this.puloDuplo = false;
+    }
   }
   
   aplicaGravidade() {

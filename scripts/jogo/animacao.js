@@ -16,10 +16,11 @@ class Animacao {
     this.larguraSprite = larguraSprite;
     this.alturaSprite = alturaSprite;
     
+    //?? refatorar para receber uma variável global de controle do frame??
     this.frameAtual = 0;
   }
   
-  //função de exibição do Sprite
+  //função de exibição do Sprite, é chamada a cada frame na função draw()
   exibe() {
     
     //atualização do enquadramento da sprite para criar o efeito de animação
@@ -42,8 +43,8 @@ class Animacao {
   
   //atualização do estágio, mecânica simples aqui, mas poderia ser refatorado para trazer a complexidade do cálculo do enquadramento da Sprite?
   anima() {
+    //sugestão: tornar essa variável global e atualizada diretamente dentro da função draw() para possibilitar cálculos globais
     this.frameAtual++;
-    
     
     //esse reset do valor do frame poderia ser substituído pela lógica do % ?
     if (this.frameAtual >= this.matriz.length -1) {

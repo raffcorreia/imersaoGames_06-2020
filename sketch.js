@@ -90,7 +90,7 @@ function setup() {
                         104,
                         104);
   
-  frameRate(10);
+  //frameRate(10);
   //trilhaSonora.loop();
 }
 
@@ -114,6 +114,8 @@ function draw() {
 
 }
 
+
+//função criada por raffcorreia para fazer o som funcionar mesmo rodando o jogo fora do P5
 function mouseClicked() {
   if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
     if (!somEstaTocando) {
