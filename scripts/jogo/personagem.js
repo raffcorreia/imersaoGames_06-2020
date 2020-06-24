@@ -23,7 +23,7 @@ class Personagem extends Animacao{
   
   pula() {
     this.y = this.y - 50;
-    console.log('pulou');
+
   }
   
   aplicaGravidade() {

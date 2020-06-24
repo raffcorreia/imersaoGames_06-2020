@@ -60,6 +60,7 @@ const matrizHipsta =[
 
 //variáveis de sons
 let trilhaSonora;
+let somEstaTocando = false;
 
 
 function preload() {
@@ -72,7 +73,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(800, 600);
   cenario = new Cenario(imagemPlanoDeFundo, 3);
   personagem = new Personagem(matrizHipsta, 
                         imagemHipsta,
@@ -97,7 +98,6 @@ function setup() {
 function keyPressed() {
   if(key === 'ArrowUp') {
     personagem.pula();
-    console.log('deu');
   }
 }
 
@@ -112,4 +112,16 @@ function draw() {
   inimigo.exibe();
   inimigo.move();
 
+}
+
+function mouseClicked() {
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+    if (!somEstaTocando) {
+      trilhaSonora.loop();
+      somEstaTocando = true;
+    } else {
+      trilhaSonora.stop();  
+      somEstaTocando = false;
+    }
+  }
 }
