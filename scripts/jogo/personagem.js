@@ -5,6 +5,7 @@ class Personagem extends Animacao{
                x, 
                largura, 
                altura, 
+               variacaoY,
                larguraSprite, 
                alturaSprite) 
   {super(matriz, 
@@ -12,11 +13,13 @@ class Personagem extends Animacao{
           x, 
           largura, 
           altura, 
+          variacaoY,
           larguraSprite, 
           alturaSprite)
    
   //variáveis responsáveis pela mecânica do pulo
-   this.yInicial = height - this.altura;
+  this.variacaoY = variacaoY; 
+  this.yInicial = height - this.altura - this.variacaoY;
    this.y = this.yInicial;
    this.velocidadeDoPulo = 0;
    this.gravidade = 3;

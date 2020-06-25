@@ -4,6 +4,7 @@ class Animacao {
                x, 
                largura, 
                altura, 
+               variacaoY,
                larguraSprite, 
                alturaSprite) 
   {
@@ -11,8 +12,9 @@ class Animacao {
     this.imagem = imagem;
     this.largura = largura;
     this.altura = altura;
+    this.variacaoY = variacaoY;
     this.x = x;
-    this.y = height - this.altura;
+    this.y = height - this.altura - this.variacaoY;
     this.larguraSprite = larguraSprite;
     this.alturaSprite = alturaSprite;
     

@@ -5,6 +5,7 @@ class Inimigo extends Animacao {
                x, 
                largura, 
                altura, 
+               variacaoY,
                larguraSprite, 
                alturaSprite) 
   {super(matriz, 
@@ -12,6 +13,7 @@ class Inimigo extends Animacao {
           x, 
           largura, 
           altura, 
+          variacaoY,
           larguraSprite, 
           alturaSprite);
    

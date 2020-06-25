@@ -82,6 +82,7 @@ function setup() {
                         0,
                         110,
                         135,
+                        30,
                         220,
                         270);
   inimigo = new Inimigo(matrizInimigo, 
@@ -89,6 +90,7 @@ function setup() {
                         width -52,
                         52,
                         52,
+                        30,
                         104,
                         104);
   
