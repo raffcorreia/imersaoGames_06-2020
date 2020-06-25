@@ -61,6 +61,7 @@ const matrizHipsta =[
 //variáveis de sons
 let trilhaSonora;
 let somEstaTocando = false;
+let somDoPulo;
 
 
 function preload() {
@@ -69,6 +70,7 @@ function preload() {
   imagemInimigo = loadImage('imagens/inimigos/gotinha.png');
   
   trilhaSonora = loadSound('sons/trilha_jogo.mp3');
+  somDoPulo = loadSound('sons/somPulo.mp3');
 }
 
 
@@ -112,6 +114,9 @@ function draw() {
   inimigo.exibe();
   inimigo.move();
 
+  if(personagem.estaColidindo(inimigo)) {
+    noLoop();
+  }
 }
 
 

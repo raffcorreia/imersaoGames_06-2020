@@ -31,6 +31,9 @@ class Personagem extends Animacao{
     if(this.y == this.yInicial) {
       this.velocidadeDoPulo = - 30;
       this.puloDuplo = true;
+
+      // ?? Só faz o som no primeiro pulo, porque??
+      this.fazSom(somDoPulo);
     } else if (this.puloDuplo){
       this.velocidadeDoPulo = -30;
       this.puloDuplo = false;
@@ -45,4 +48,26 @@ class Personagem extends Animacao{
       this.y = this.yInicial
     }
   }
+
+  fazSom(som) {
+    som.play();
+  }
+
+  //adaptado da função de bmoren em https://github.com/bmoren/p5.collide2D/blob/master/p5.collide2d.js
+  estaColidindo(inimigo) {
+
+    //constante que vai diminuir a precisão da colisão, para diminuir o hitbox
+    // ?? precisões menores que .62 não funcionam! Por que??
+    const precisao = .62;
+    
+    if(
+      this.x + (this.largura * precisao) >= inimigo.x &&
+      this.x <= inimigo.x + (inimigo.largura * precisao) &&
+      this.y + (this.altura * precisao) >= inimigo.y &&
+      this.y <= inimigo.y + (inimigo.altura * precisao)
+      ) {
+        return true;
+      }
+      return false;
+  }  
 }
