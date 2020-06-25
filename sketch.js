@@ -160,7 +160,7 @@ function setup() {
                         400,
                         10,
                         500);  
-  inimigoVoador = new Inimigo(matrizInimigoGrande, 
+  inimigoVoador = new Inimigo(matrizInimigoVoador, 
                         imagemInimigoVoador,
                         width -52,
                         52,
@@ -168,10 +168,10 @@ function setup() {
                         200,
                         200,
                         150,
-                        10,
+                        5,
                         50); 
 
-    //frameRate(10);
+    frameRate(20);
   //trilhaSonora.loop();
 }
 
