@@ -7,7 +7,9 @@ class Inimigo extends Animacao {
                altura, 
                variacaoY,
                larguraSprite, 
-               alturaSprite) 
+               alturaSprite,
+               velocidade,
+               delay) 
   {super(matriz, 
           imagem, 
           x, 
@@ -17,7 +19,9 @@ class Inimigo extends Animacao {
           larguraSprite, 
           alturaSprite);
    
-   this.velocidade = 10;
+  this.velocidade = velocidade;
+  this.delay = delay;
+  this.x = width + this.delay;
   }
   
   //função que vai movimentar o inimigo, sem inteligência
@@ -25,7 +29,7 @@ class Inimigo extends Animacao {
   move() {
     this.x = this.x - this.velocidade;
     
-    if(this.x < - this.largura) {
+    if(this.x < - this.largura -this.delay) {
       this.x = width;
     }
   }
