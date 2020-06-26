@@ -113,6 +113,7 @@ const matrizInimigoVoador = [
 ];
 
 const inimigos = [];
+let inimigoAtual = 0;
 
 
 //variáveis de sons
@@ -155,7 +156,7 @@ function setup() {
                         104,
                         104,
                         10,
-                        0);
+                        100);
   const inimigoGrande = new Inimigo(matrizInimigoGrande, 
                         imagemInimigoGrande,
                         width -52,
@@ -165,7 +166,7 @@ function setup() {
                         400,
                         400,
                         10,
-                        500);  
+                        100);  
   const inimigoVoador = new Inimigo(matrizInimigoVoador, 
                         imagemInimigoVoador,
                         width -52,
@@ -175,13 +176,13 @@ function setup() {
                         200,
                         150,
                         5,
-                        50); 
+                        100); 
 
     inimigos.push(inimigo);
     inimigos.push(inimigoGrande);
     inimigos.push(inimigoVoador);
 
-    frameRate(20);
+  //frameRate(20);
   //trilhaSonora.loop();
 }
 
@@ -203,16 +204,25 @@ function draw() {
   personagem.exibe();
   personagem.aplicaGravidade();
   
-  inimigos.forEach(inimigo => {
-    inimigo.exibe();
-    inimigo.move();
+  const inimigo = inimigos[inimigoAtual];
+  const inimigoVisivel = inimigo.x < - inimigo.largura
 
-    if(personagem.estaColidindo(inimigo)) {
-      image(imagemGameOver, 800 / 2 - 200, 600 / 3);
-      noLoop();
-      trilhaSonora.stop();
+  inimigo.exibe();
+  inimigo.move();
+
+  if (inimigoVisivel) {
+    inimigoAtual++;
+    if (inimigoAtual >= inimigos.length) {
+      inimigoAtual = 0;
     }
-  });
+    inimigo.velocidade = parseInt(random(10, 30));
+  }
+
+  if (personagem.estaColidindo(inimigo)) {
+    image(imagemGameOver, 800 / 2 - 200, 600 / 3);
+    noLoop();
+    trilhaSonora.stop();
+  }
 }
 
 
