@@ -23,6 +23,7 @@ class Personagem extends Animacao{
    this.y = this.yInicial;
    this.velocidadeDoPulo = 0;
    this.gravidade = 3;
+   this.alturaDoPulo = -30;
 
    //variável de controle do pulo duplo, true quando o usuário já pulou a primeira vez
    this.puloDuplo = false;
@@ -32,13 +33,13 @@ class Personagem extends Animacao{
   //?? daria para aplicar essa lógica com um OR ??
   pula() {
     if(this.y == this.yInicial) {
-      this.velocidadeDoPulo = - 30;
+      this.velocidadeDoPulo = this.alturaDoPulo;
       this.puloDuplo = true;
-
-      // ?? Só faz o som no primeiro pulo, porque??
       this.fazSom(somDoPulo);
+
     } else if (this.puloDuplo){
-      this.velocidadeDoPulo = -30;
+      this.velocidadeDoPulo = this.alturaDoPulo;
+      this.fazSom(somDoPulo);
       this.puloDuplo = false;
     }
   }

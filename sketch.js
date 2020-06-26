@@ -1,5 +1,7 @@
 //variáveis das imagens
 let imagemPlanoDeFundo;
+let pontuacao;
+let imagemGameOver;
 let imagemHipsta;
 let imagemInimigo;
 let imagemInimigoGrande;
@@ -110,6 +112,8 @@ const matrizInimigoVoador = [
   [0, 750],
 ];
 
+const inimigos = [];
+
 
 //variáveis de sons
 let trilhaSonora;
@@ -119,6 +123,7 @@ let somDoPulo;
 
 function preload() {
   imagemPlanoDeFundo = loadImage('imagens/cenario/floresta.png');
+  imagemGameOver = loadImage('imagens/assets/game-over.png');
   imagemHipsta = loadImage('imagens/personagem/correndo.png');
   imagemInimigo = loadImage('imagens/inimigos/gotinha.png');
   imagemInimigoGrande = loadImage('imagens/inimigos/troll.png');
@@ -132,6 +137,7 @@ function preload() {
 function setup() {
   createCanvas(800, 600);
   cenario = new Cenario(imagemPlanoDeFundo, 3);
+  pontuacao = new Pontuacao();
   personagem = new Personagem(matrizHipsta, 
                         imagemHipsta,
                         0,
@@ -140,7 +146,7 @@ function setup() {
                         30,
                         220,
                         270);
-  inimigo = new Inimigo(matrizInimigo, 
+  const inimigo = new Inimigo(matrizInimigo, 
                         imagemInimigo,
                         width -52,
                         52,
@@ -150,7 +156,7 @@ function setup() {
                         104,
                         10,
                         0);
-  inimigoGrande = new Inimigo(matrizInimigoGrande, 
+  const inimigoGrande = new Inimigo(matrizInimigoGrande, 
                         imagemInimigoGrande,
                         width -52,
                         200,
@@ -160,7 +166,7 @@ function setup() {
                         400,
                         10,
                         500);  
-  inimigoVoador = new Inimigo(matrizInimigoVoador, 
+  const inimigoVoador = new Inimigo(matrizInimigoVoador, 
                         imagemInimigoVoador,
                         width -52,
                         52,
@@ -170,6 +176,10 @@ function setup() {
                         150,
                         5,
                         50); 
+
+    inimigos.push(inimigo);
+    inimigos.push(inimigoGrande);
+    inimigos.push(inimigoVoador);
 
     frameRate(20);
   //trilhaSonora.loop();
@@ -186,22 +196,23 @@ function keyPressed() {
 function draw() {
   cenario.exibe();
   cenario.move();
+
+  pontuacao.exibe();
+  pontuacao.adicionarPonto();
   
   personagem.exibe();
   personagem.aplicaGravidade();
   
-  inimigo.exibe();
-  inimigo.move();
+  inimigos.forEach(inimigo => {
+    inimigo.exibe();
+    inimigo.move();
 
-  inimigoGrande.exibe();
-  inimigoGrande.move();
-
-  inimigoVoador.exibe();
-  inimigoVoador.move();
-
-  if(personagem.estaColidindo(inimigo)) {
-    //noLoop();
-  }
+    if(personagem.estaColidindo(inimigo)) {
+      image(imagemGameOver, 800 / 2 - 200, 600 / 3);
+      noLoop();
+      trilhaSonora.stop();
+    }
+  });
 }
 
 
