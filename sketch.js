@@ -1,7 +1,13 @@
 function setup() {
   createCanvas(800, 600);
   jogo = new Jogo();
-  jogo.setup();  
+  telaInicial = new TelaInicial();
+  jogo.setup();
+  cenas = {
+    jogo,
+    telaInicial,
+  }
+  botaoGerenciador = new BotaoGerenciador('Iniciar', 400, 300)
 
   //frameRate(20);
   //trilhaSonora.loop();
@@ -14,7 +20,7 @@ function keyPressed() {
 
 
 function draw() {
-  jogo.draw();
+  cenas[cenaAtual].draw();
 }
 
 

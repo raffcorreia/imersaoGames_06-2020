@@ -1,7 +1,13 @@
 let jogo;
+let cenaAtual = 'telaInicial';
+let cenas;
+let telaInicial;
+let fonteTelaInicial;
+let botaoGerenciador;
 
 //variáveis das imagens
 let imagemPlanoDeFundo;
+let imagemTelaInicial;
 let pontuacao;
 let imagemGameOver;
 let imagemHipsta;
@@ -115,8 +121,6 @@ const matrizInimigoVoador = [
 ];
 
 const inimigos = [];
-let inimigoAtual = 0;
-
 
 //variáveis de sons
 let trilhaSonora;
