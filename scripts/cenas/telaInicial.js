@@ -22,6 +22,8 @@ class TelaInicial {
     }
 
     _botao() {
+        botaoGerenciador.y = 600 / 7 * 5;
+        botaoGerenciador.x = 800 / 12 * 5;
         botaoGerenciador.draw();
     }
 }
