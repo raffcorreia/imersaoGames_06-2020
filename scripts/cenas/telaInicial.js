@@ -22,8 +22,8 @@ class TelaInicial {
     }
 
     _botao() {
-        botaoGerenciador.y = 600 / 7 * 5;
-        botaoGerenciador.x = 800 / 12 * 5;
+        botaoGerenciador.y = 600 / 7 * 5; // valor calculado no olho, já que estou usando um canvas menor que a tela
+        botaoGerenciador.x = 800 / 12 * 5; // valor calculado no olho, já que estou usando um canvas menor que a tela
         botaoGerenciador.draw();
     }
 }

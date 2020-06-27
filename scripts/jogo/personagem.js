@@ -25,6 +25,8 @@ class Personagem extends Animacao{
    this.gravidade = 3;
    this.alturaDoPulo = -30;
 
+   this.invencivel = false;
+
    //variável de controle do pulo duplo, true quando o usuário já pulou a primeira vez
    this.puloDuplo = false;
   }
@@ -57,8 +59,19 @@ class Personagem extends Animacao{
     som.play();
   }
 
+  tornaInvecivel() {
+    this.invencivel = true;
+    setTimeout(() => {
+      this.invencivel = false;
+    }, 1000);
+  }
   //adaptado da função de bmoren em https://github.com/bmoren/p5.collide2D/blob/master/p5.collide2d.js
   estaColidindo(inimigo) {
+
+    //condição para evitar as múltiplas colisões com um mesmo inimigo ou quando o personagem ganhou invencibilidade
+    if (this.invencivel) {
+      return false;
+    }
 
     //constante que vai diminuir a precisão da colisão, para diminuir o hitbox
     // ?? precisões menores que .62 não funcionam! Por que??

@@ -1,14 +1,16 @@
 let jogo;
-let cenaAtual = 'telaInicial';
+let cenaAtual = 'jogo';
 let cenas;
 let telaInicial;
 let fonteTelaInicial;
 let botaoGerenciador;
+let vida;
 
 //variáveis das imagens
 let imagemPlanoDeFundo;
 let imagemTelaInicial;
 let pontuacao;
+let imagemVida
 let imagemGameOver;
 let imagemHipsta;
 let imagemInimigo;

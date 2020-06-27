@@ -1,12 +1,20 @@
 class Jogo {
     constructor () {
         this.inimigoAtual = 0;
+        this.mapa = [
+            {
+                inimigo: 0, 
+                velocidade,
+            }
+        ]
     }
 
     setup () {
         cenario = new Cenario(imagemPlanoDeFundo, 3);
-  pontuacao = new Pontuacao();
-  personagem = new Personagem(matrizHipsta, 
+        pontuacao = new Pontuacao();
+        vida = new Vida(3, 3);
+
+        personagem = new Personagem(matrizHipsta, 
                         imagemHipsta,
                         0,
                         110,
@@ -14,7 +22,7 @@ class Jogo {
                         30,
                         220,
                         270);
-  const inimigo = new Inimigo(matrizInimigo, 
+        const inimigo = new Inimigo(matrizInimigo, 
                         imagemInimigo,
                         width -52,
                         52,
@@ -24,7 +32,7 @@ class Jogo {
                         104,
                         10,
                         100);
-  const inimigoGrande = new Inimigo(matrizInimigoGrande, 
+        const inimigoGrande = new Inimigo(matrizInimigoGrande, 
                         imagemInimigoGrande,
                         width -52,
                         200,
@@ -34,7 +42,7 @@ class Jogo {
                         400,
                         10,
                         100);  
-  const inimigoVoador = new Inimigo(matrizInimigoVoador, 
+        const inimigoVoador = new Inimigo(matrizInimigoVoador, 
                         imagemInimigoVoador,
                         width -52,
                         52,
@@ -45,9 +53,9 @@ class Jogo {
                         5,
                         100); 
 
-    inimigos.push(inimigo);
-    inimigos.push(inimigoGrande);
-    inimigos.push(inimigoVoador);
+        inimigos.push(inimigo);
+        inimigos.push(inimigoGrande);
+        inimigos.push(inimigoVoador);
     }
 
     keyPressed(key) {
@@ -60,6 +68,7 @@ class Jogo {
         cenario.exibe();
         cenario.move();
       
+        vida.draw();
         pontuacao.exibe();
         pontuacao.adicionarPonto();
         
@@ -81,9 +90,13 @@ class Jogo {
         }
       
         if (personagem.estaColidindo(inimigo)) {
-          image(imagemGameOver, 800 / 2 - 200, 600 / 3);
-          noLoop();
-          trilhaSonora.stop();
+            vida.perdeVida();
+            personagem.tornaInvecivel();
+            if(vida.vidas == 0) {
+                image(imagemGameOver, 800 / 2 - 200, 600 / 3);
+                noLoop();
+                trilhaSonora.stop();
+            }
         }
     }
 }
