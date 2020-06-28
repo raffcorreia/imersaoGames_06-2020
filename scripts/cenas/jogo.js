@@ -1,18 +1,15 @@
 class Jogo {
     constructor () {
-        this.inimigoAtual = 0;
-        this.mapa = [
-            {
-                inimigo: 0, 
-                velocidade,
-            }
-        ]
+        this.indiceMapa = 0;
+        this.mapa = cartucho.mapa;
+        this.configuracoes = cartucho.configuracoes;
     }
 
     setup () {
         cenario = new Cenario(imagemPlanoDeFundo, 3);
         pontuacao = new Pontuacao();
-        vida = new Vida(3, 3);
+        vida = new Vida(this.configuracoes.vidaMaxima,
+                        this.configuracoes.vidaInicial);
 
         personagem = new Personagem(matrizHipsta, 
                         imagemHipsta,
@@ -30,8 +27,7 @@ class Jogo {
                         30,
                         104,
                         104,
-                        10,
-                        100);
+                        10);
         const inimigoGrande = new Inimigo(matrizInimigoGrande, 
                         imagemInimigoGrande,
                         width -52,
@@ -40,8 +36,7 @@ class Jogo {
                         0,
                         400,
                         400,
-                        10,
-                        100);  
+                        10);  
         const inimigoVoador = new Inimigo(matrizInimigoVoador, 
                         imagemInimigoVoador,
                         width -52,
@@ -50,8 +45,7 @@ class Jogo {
                         200,
                         200,
                         150,
-                        5,
-                        100); 
+                        5); 
 
         inimigos.push(inimigo);
         inimigos.push(inimigoGrande);
@@ -75,18 +69,21 @@ class Jogo {
         personagem.exibe();
         personagem.aplicaGravidade();
         
-        const inimigo = inimigos[this.inimigoAtual];
+        const linhaAtual = this.mapa[this.indiceMapa];
+        const inimigo = inimigos[linhaAtual.inimigo];
         const inimigoVisivel = inimigo.x < - inimigo.largura
-      
+        
+        inimigo.velocidade = linhaAtual.velocidade;
+        
         inimigo.exibe();
         inimigo.move();
       
         if (inimigoVisivel) {
-          this.inimigoAtual++;
-          if (this.inimigoAtual >= inimigos.length) {
-            this.inimigoAtual = 0;
+          this.indiceMapa++;
+          inimigo.aparece();
+          if (this.indiceMapa > this.mapa.length - 1) {
+            this.indiceMapa = 0;
           }
-          inimigo.velocidade = parseInt(random(10, 30));
         }
       
         if (personagem.estaColidindo(inimigo)) {
