@@ -59,13 +59,20 @@ class Jogo {
     }
 
     draw() {
+        
         cenario.exibe();
         cenario.move();
-      
+        
         vida.draw();
         pontuacao.exibe();
         pontuacao.adicionarPonto();
         
+        //verifica se ainda há vidas só depois de atualizar o cenário e a vida
+        if(vida.vidas == 0) {
+            image(imagemGameOver, 800 / 2 - 200, 600 / 3);
+            noLoop();
+            trilhaSonora.stop();
+        }
         personagem.exibe();
         personagem.aplicaGravidade();
         
@@ -89,11 +96,6 @@ class Jogo {
         if (personagem.estaColidindo(inimigo)) {
             vida.perdeVida();
             personagem.tornaInvecivel();
-            if(vida.vidas == 0) {
-                image(imagemGameOver, 800 / 2 - 200, 600 / 3);
-                noLoop();
-                trilhaSonora.stop();
-            }
         }
     }
 }
